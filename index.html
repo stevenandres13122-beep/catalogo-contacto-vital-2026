@@ -1166,32 +1166,40 @@
 
 
     <script>
-        (() => {
+        document.addEventListener('DOMContentLoaded', function () {
             const searchInput = document.getElementById('product-search');
             const count = document.getElementById('search-count');
-            const cards = [...document.querySelectorAll('.producto-card')];
+            const cards = Array.from(document.querySelectorAll('.producto-card'));
 
-            const normalize = (value) => value
-                .toLocaleLowerCase('es')
-                .normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '');
+            if (!searchInput || !count || cards.length === 0) return;
 
-            const updateResults = () => {
-                const query = normalize(searchInput.value.trim());
+            function normalize(value) {
+                return String(value || '')
+                    .toLowerCase()
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '')
+                    .trim();
+            }
+
+            function updateResults() {
+                const query = normalize(searchInput.value);
                 let visible = 0;
 
-                cards.forEach((card) => {
-                    const matches = !query || normalize(card.textContent).includes(query);
-                    card.hidden = !matches;
+                cards.forEach(function (card) {
+                    const productText = normalize(card.innerText || card.textContent);
+                    const matches = query === '' || productText.indexOf(query) !== -1;
+                    card.style.display = matches ? '' : 'none';
                     if (matches) visible += 1;
                 });
 
-                count.textContent = `${visible} producto${visible === 1 ? '' : 's'}`;
-            };
+                count.textContent = visible + ' producto' + (visible === 1 ? '' : 's');
+            }
 
             searchInput.addEventListener('input', updateResults);
+            searchInput.addEventListener('change', updateResults);
+            searchInput.addEventListener('keyup', updateResults);
             updateResults();
-        })();
+        });
     </script>
 </body>
 </html>
