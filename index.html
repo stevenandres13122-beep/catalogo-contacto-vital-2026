@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Manual Operativo - Contacto Vital">
+  <meta name="theme-color" content="#214c3f">
   <title>Manual Operativo - Contacto Vital</title>
   <style>
     :root {
@@ -19,198 +20,222 @@
     }
 
     * { box-sizing: border-box; }
-    html, body { margin: 0; min-height: 100%; background: #f2f2f2; }
-    body { color: var(--text); font-family: Arial, Helvetica, sans-serif; }
-    .sheet {
-      container-type: inline-size;
-      position: relative;
-      width: min(100%, 900px);
-      aspect-ratio: 595.92 / 842.88;
-      margin: 0 auto 14px;
-      padding: 5.5% 8.5% 0;
-      overflow: visible;
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
       background: #fff;
-      border: 1px solid #e0e0e0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
     }
-    .doc-header {
+    .site-header { padding: 26px 24px 14px; background: #fff; }
+    .header-inner {
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: minmax(0, 1fr) auto;
       align-items: end;
-      gap: 1cqw;
-      padding-bottom: 1.1cqw;
-      border-bottom: .18cqw solid var(--green-dark);
+      gap: 22px;
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding-bottom: 13px;
+      border-bottom: 2px solid var(--green-dark);
     }
-    .brand-title { display: flex; align-items: center; gap: 1cqw; min-width: 0; }
-    .logo { display: block; width: 4.3cqw; height: 4.3cqw; flex: 0 0 auto; }
+    .heading-area { display: flex; align-items: center; gap: 13px; min-width: 0; }
+    .logo { display: block; width: 48px; height: 48px; flex: 0 0 auto; }
     h1 {
-      margin: 0 0 .45cqw;
+      margin: 0 0 3px;
       color: var(--green-dark);
-      font-size: 2.05cqw;
-      line-height: 1.15;
-      font-weight: 700;
-      letter-spacing: .01em;
+      font-size: clamp(25px, 3vw, 34px);
+      line-height: 1.12;
+      letter-spacing: -.025em;
+      font-weight: 750;
     }
-    .subtitle { color: var(--muted); font-size: 1.45cqw; line-height: 1.25; }
-    .meta { text-align: right; color: #333; font-size: 1.2cqw; line-height: 1.28; white-space: nowrap; }
-    .meta p { margin: 0; }
-    .bar {
-      margin: 1.45cqw 0 .75cqw;
-      padding: .48cqw .75cqw;
+    .subtitle { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.35; }
+    .meta-list { display: grid; gap: 1px; justify-items: end; color: #333; font-size: 13px; line-height: 1.35; text-align: right; }
+    .meta-list p { margin: 0; }
+    .content { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 13px 0 32px; }
+    .section { margin-top: 18px; }
+    .section-heading {
+      margin: 0 0 10px;
+      padding: 7px 10px;
       color: #fff;
       background: var(--green-dark);
-      font-size: 1.5cqw;
-      line-height: 1.25;
-      font-weight: 700;
+      font-size: 17px;
+      line-height: 1.35;
+      font-weight: 750;
     }
-    .options { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2cqw; }
+    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
     .option {
       min-width: 0;
-      padding: 1.05cqw 1cqw;
-      border: .12cqw solid var(--green-border);
+      padding: 13px 14px 12px;
+      border: 1px solid var(--green-border);
       background: var(--green-light);
     }
-    .option h2 {
-      margin: 0 0 .45cqw;
-      padding-bottom: .45cqw;
-      border-bottom: .1cqw solid #dce9e2;
+    .option h3 {
+      margin: 0 0 7px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #dce9e2;
       color: var(--green-dark);
-      font-size: 1.4cqw;
-      line-height: 1.25;
+      font-size: 15px;
+      line-height: 1.35;
+      font-weight: 750;
     }
-    .option p { margin: .4cqw 0; font-size: 1.45cqw; line-height: 1.38; }
+    .option p { margin: 6px 0 0; font-size: 14px; line-height: 1.45; }
     .option strong { font-weight: 700; }
-    .objections { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 1.42cqw; line-height: 1.34; }
+    .table-wrap { overflow-x: auto; }
+    .objections { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 14px; line-height: 1.4; }
     .objections col:first-child { width: 28%; }
     .objections col:last-child { width: 72%; }
     .objections th {
-      padding: .82cqw .75cqw;
+      padding: 9px 10px;
       color: #fff;
       background: var(--green);
       text-align: left;
-      font-size: 1.42cqw;
-      line-height: 1.2;
+      font-size: 14px;
+      line-height: 1.3;
       font-weight: 700;
     }
-    .objections td {
-      padding: .82cqw .75cqw;
-      border: .1cqw solid var(--line);
-      vertical-align: top;
-    }
+    .objections td { padding: 8px 10px; border: 1px solid var(--line); vertical-align: top; }
     .objections tbody tr:nth-child(even) { background: #f4f8f5; }
     .objections td:first-child { color: var(--objection); font-weight: 700; }
-    .note { display: block; margin-top: .32cqw; color: var(--green-dark); font-weight: 700; }
+    .note { display: block; margin-top: 4px; color: var(--green-dark); font-weight: 700; }
     .qa {
-      margin-top: 1.15cqw;
-      padding: .75cqw .9cqw;
-      border: .12cqw solid #d0d0d0;
+      margin-top: 12px;
+      padding: 9px 11px;
+      border: 1px solid #d0d0d0;
       background: #fafafa;
       color: #333;
-      font-size: 1.34cqw;
+      font-size: 14px;
       line-height: 1.45;
     }
-    .footer-sheet {
-      padding: 1.35% 8.5% 0;
-    }
-    .footer-line {
-      display: flex;
-      justify-content: space-between;
-      gap: 2cqw;
-      padding: .25cqw 0 1.8cqw;
-      border-bottom: .12cqw solid #ddd;
-      color: #666;
-      font-size: 1.3cqw;
-      line-height: 1.2;
-      white-space: nowrap;
+    .qa p { margin: 0; }
+    footer { padding: 0 24px 22px; color: #666; }
+    .footer-inner {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding-top: 12px;
+      border-top: 1px solid #ddd;
+      font-size: 12px;
     }
 
-    @media (max-width: 600px) {
-      .sheet { margin-bottom: 8px; }
+    @media (max-width: 760px) {
+      .site-header { padding: 20px 18px 12px; }
+      .header-inner { grid-template-columns: 1fr; gap: 12px; align-items: start; }
+      .meta-list { justify-items: start; text-align: left; }
+      .cards { grid-template-columns: 1fr; }
+      .content { width: calc(100% - 36px); padding-top: 12px; }
+      .objections, .objections tbody, .objections tr, .objections td { display: block; width: 100%; }
+      .objections colgroup, .objections thead { display: none; }
+      .objections tbody tr { padding: 8px 12px; border: 1px solid var(--line); border-top: 0; }
+      .objections tbody tr:nth-child(even) { background: #f4f8f5; }
+      .objections td { padding: 4px 0; border: 0; }
+      .objections td:first-child { padding-bottom: 7px; }
+      .objections td:first-child::before, .objections td:last-child::before {
+        display: block;
+        margin-bottom: 2px;
+        color: #555;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .objections td:first-child::before { content: "Objeción Común"; }
+      .objections td:last-child::before { content: "Respuesta de Desarme y Redirección Comercial"; }
+      footer { padding-right: 18px; padding-left: 18px; }
     }
-    @media print {
-      html, body { background: #fff; }
-      .sheet { margin: 0 auto; border: 0; page-break-after: always; }
-      @page { size: A4; margin: 0; }
+    @media (max-width: 480px) {
+      .heading-area { align-items: flex-start; gap: 10px; }
+      .logo { width: 40px; height: 40px; }
+      h1 { font-size: 25px; }
+      .subtitle { font-size: 14px; }
+      .section-heading { font-size: 15px; }
+      .option { padding: 12px; }
+      .option p, .objections { font-size: 14px; }
+      .qa { font-size: 13px; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <article class="sheet" aria-label="Manual Operativo - Contacto Vital">
-      <header class="doc-header">
-        <div class="brand-title">
-          <svg class="logo" viewBox="0 0 64 64" role="img" aria-label="Símbolo de Contacto Vital">
-            <rect x="2" y="2" width="60" height="60" rx="15" fill="#214c3f"/>
-            <path d="M15 17c0-3 2-5 5-5h24c3 0 5 2 5 5v19c0 3-2 5-5 5H33l-9 8v-8h-4c-3 0-5-2-5-5V17Z" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/>
-            <path d="M19 28h7l4-7 6 16 5-9h6" fill="none" stroke="#c9e0d5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <div>
-            <h1>CONTACTO VITAL — GUÍA DE OPERACIONES</h1>
-            <div class="subtitle">Protocolo de Sondeo Holístico y Argumentario de Ventas</div>
-          </div>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="heading-area">
+        <svg class="logo" viewBox="0 0 64 64" role="img" aria-label="Símbolo de Contacto Vital">
+          <rect x="2" y="2" width="60" height="60" rx="15" fill="#eaf4ed"/>
+          <path d="M15 17c0-3 2-5 5-5h24c3 0 5 2 5 5v19c0 3-2 5-5 5H33l-9 8v-8h-4c-3 0-5-2-5-5V17Z" fill="none" stroke="#214c3f" stroke-width="2.6" stroke-linejoin="round"/>
+          <path d="M19 28h7l4-7 6 16 5-9h6" fill="none" stroke="#28694f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <h1>CONTACTO VITAL — GUÍA DE OPERACIONES</h1>
+          <p class="subtitle">Protocolo de Sondeo Holístico y Argumentario de Ventas</p>
         </div>
-        <div class="meta">
-          <p><strong>Código:</strong> GO-NAT-2024</p>
-          <p><strong>Versión:</strong> 3.2 (Revisado)</p>
-          <p><strong>Área:</strong> Call Center / Venta Consultiva</p>
-        </div>
-      </header>
+      </div>
+      <div class="meta-list">
+        <p><strong>Código:</strong> GO-NAT-2024</p>
+        <p><strong>Versión:</strong> 3.2 (Revisado)</p>
+        <p><strong>Área:</strong> Call Center / Venta Consultiva</p>
+      </div>
+    </div>
+  </header>
 
-      <h2 class="bar">1. EVALUACIÓN HOLÍSTICA EN LLAMADA (FÍSICA Y SEXUAL)</h2>
-      <section class="options" aria-label="Opciones de evaluación">
+  <main class="content">
+    <section class="section" aria-labelledby="evaluacion">
+      <h2 class="section-heading" id="evaluacion">1. EVALUACIÓN HOLÍSTICA EN LLAMADA (FÍSICA Y SEXUAL)</h2>
+      <div class="cards">
         <article class="option">
-          <h2>OPCIÓN A: SALUD FÍSICA Y VITALIDAD</h2>
+          <h3>OPCIÓN A: SALUD FÍSICA Y VITALIDAD</h3>
           <p><strong>Pregunta de filtro:</strong> "En tu día a día, ¿has sentido cansancio acumulado, pesadez o falta de fuerza para rendir en tus jornadas?"</p>
           <p><strong>Argumento de cierre:</strong> "Es un cuadro clásico de acumulación de toxinas. Con una desintoxicación a base de extractos orgánicos recuperamos tu energía y vitalidad física."</p>
         </article>
         <article class="option">
-          <h2>OPCIÓN B: RENDIMIENTO Y POTENCIA SEXUAL</h2>
+          <h3>OPCIÓN B: RENDIMIENTO Y POTENCIA SEXUAL</h3>
           <p><strong>Pregunta de filtro:</strong> "En la parte íntima, ¿has notado cambios en la firmeza de la erección o que la duración ya no es igual a la de antes?"</p>
           <p><strong>Argumento de cierre:</strong> "Con la edad los conductos peneanos acumulan saturación sanguínea. La solución natural limpia los conductos para restaurar la potencia."</p>
         </article>
-      </section>
-
-      <h2 class="bar">2. MATRIZ DE REBATIMIENTO Y DESARME DE OBJECIONES</h2>
-      <table class="objections">
-        <colgroup><col><col></colgroup>
-        <thead>
-          <tr>
-            <th>Objeción Común</th>
-            <th>Respuesta de Desarme y Redirección Comercial</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>"Estoy ocupado / No tengo tiempo"</td>
-            <td>"Entiendo perfectamente, voy directo al punto. Solo necesito 30 segundos para confirmar si eres apto para el tratamiento natural y te libero. ¿Qué edad tienes actualmente?"<span class="note">Nota: Mantiene el ritmo de la llamada y evita el cuelgue.</span></td>
-          </tr>
-          <tr>
-            <td>"Yo no me he registrado en nada"</td>
-            <td>"Comprendo. A veces vemos publicidad de salud natural y dejamos los datos para recibir información. El registro se hizo para la guía de revitalización. ¿Sientes baja energía o agotamiento últimamente?"<span class="note">Nota: Resta importancia al registro y enfoca al cliente en su síntoma.</span></td>
-          </tr>
-          <tr>
-            <td>"Yo estoy perfecto, no necesito nada"</td>
-            <td>"Excelente. La medicina natural trabaja precisamente en la prevención. Con los años la circulación pierde potencia en todo el cuerpo. ¿Sientes que rindes igual que hace 5 años o te gustaría potenciarte?"<span class="note">Nota: Replantea la venta de 'curar enfermedad' a 'potenciar rendimiento'.</span></td>
-          </tr>
-          <tr>
-            <td>"¿Cuánto cuesta el tratamiento?"</td>
-            <td>"La valoración de hoy es totalmente gratuita por tu registro. El valor del concentrado vegetal depende del tipo de tratamiento que requieras. ¿Sufres de hipertensión o diabetes?"<span class="note">Nota: Oculta la objeción del precio vendiendo el diagnóstico gratis.</span></td>
-          </tr>
-          <tr>
-            <td>"¿Tiene efectos secundarios o químicos?"</td>
-            <td>"No, de ninguna manera. Nuestros extractos son 100% orgánicos, certificados y no generan dependencia ni contraindicaciones. Por eso te pregunto: ¿sufres de alguna condición actualmente?"<span class="note">Nota: Transmite seguridad inmediata respaldando el origen vegetal.</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <aside class="qa"><strong>INSTRUCCIÓN INTERNA DE QA:</strong> Mantener un tono firme, empático y respetuoso. Recordar que el objetivo es derivar la llamada al especialista en menos de 3 minutos. Prohibido discutir o usar lenguaje técnico/clínico complejo.</aside>
-    </article>
-
-    <article class="sheet footer-sheet" aria-label="Pie de página del documento original">
-      <div class="footer-line">
-        <span>Contacto Vital — Documento de Uso Interno para Capacitación de Asesores</span>
-        <span>Página 1 de 1</span>
       </div>
-    </article>
+    </section>
+
+    <section class="section" aria-labelledby="objeciones">
+      <h2 class="section-heading" id="objeciones">2. MATRIZ DE REBATIMIENTO Y DESARME DE OBJECIONES</h2>
+      <div class="table-wrap">
+        <table class="objections">
+          <colgroup><col><col></colgroup>
+          <thead>
+            <tr>
+              <th>Objeción Común</th>
+              <th>Respuesta de Desarme y Redirección Comercial</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>"Estoy ocupado / No tengo tiempo"</td>
+              <td>"Entiendo perfectamente, voy directo al punto. Solo necesito 30 segundos para confirmar si eres apto para el tratamiento natural y te libero. ¿Qué edad tienes actualmente?"<span class="note">Nota: Mantiene el ritmo de la llamada y evita el cuelgue.</span></td>
+            </tr>
+            <tr>
+              <td>"Yo no me he registrado en nada"</td>
+              <td>"Comprendo. A veces vemos publicidad de salud natural y dejamos los datos para recibir información. El registro se hizo para la guía de revitalización. ¿Sientes baja energía o agotamiento últimamente?"<span class="note">Nota: Resta importancia al registro y enfoca al cliente en su síntoma.</span></td>
+            </tr>
+            <tr>
+              <td>"Yo estoy perfecto, no necesito nada"</td>
+              <td>"Excelente. La medicina natural trabaja precisamente en la prevención. Con los años la circulación pierde potencia en todo el cuerpo. ¿Sientes que rindes igual que hace 5 años o te gustaría potenciarte?"<span class="note">Nota: Replantea la venta de 'curar enfermedad' a 'potenciar rendimiento'.</span></td>
+            </tr>
+            <tr>
+              <td>"¿Cuánto cuesta el tratamiento?"</td>
+              <td>"La valoración de hoy es totalmente gratuita por tu registro. El valor del concentrado vegetal depende del tipo de tratamiento que requieras. ¿Sufres de hipertensión o diabetes?"<span class="note">Nota: Oculta la objeción del precio vendiendo el diagnóstico gratis.</span></td>
+            </tr>
+            <tr>
+              <td>"¿Tiene efectos secundarios o químicos?"</td>
+              <td>"No, de ninguna manera. Nuestros extractos son 100% orgánicos, certificados y no generan dependencia ni contraindicaciones. Por eso te pregunto: ¿sufres de alguna condición actualmente?"<span class="note">Nota: Transmite seguridad inmediata respaldando el origen vegetal.</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <aside class="qa">
+        <p><strong>INSTRUCCIÓN INTERNA DE QA:</strong> Mantener un tono firme, empático y respetuoso. Recordar que el objetivo es derivar la llamada al especialista en menos de 3 minutos. Prohibido discutir o usar lenguaje técnico/clínico complejo.</p>
+      </aside>
+    </section>
   </main>
+
+  <footer>
+    <div class="footer-inner">Contacto Vital — Documento de Uso Interno para Capacitación de Asesores</div>
+  </footer>
 </body>
 </html>
